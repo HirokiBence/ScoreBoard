@@ -1,9 +1,11 @@
+/* プレイヤー1 */
 const p1 = {
   score: 0,
   button: document.querySelector('#p1Button'),
   display: document.querySelector('#p1Display'),
 }
 
+/* プレイヤー2 */
 const p2 = {
   score: 0,
   button: document.querySelector('#p2Button'),
@@ -12,16 +14,11 @@ const p2 = {
 
 const resetButton = document.querySelector('#reset');
 const winningScoreSelect = document.querySelector('#winningScore');
-// const p1Button = document.querySelector('#p1Button');
-// const p2Button = document.querySelector('#p2Button');
-// const p1Display = document.querySelector('#p1Display');
-// const p2Display = document.querySelector('#p2Display');
 
 let winningScore = 3;
 let isGameOver = false;
-// let p1Score = 0;
-// let p2Score = 0;
 
+/* 得点加算処理 */
 function updateScores(player, opponent) {
   if (!isGameOver) {
     player.Score += 1;
@@ -36,16 +33,19 @@ function updateScores(player, opponent) {
   }
 }
 
+/* プレイヤー1に得点追加 */
 p1.button.addEventListener('click', function () {
   updateScores(p1, p2);
 });
 
+/* プレイヤー2に得点追加 */
 p2.button.addEventListener('click', function () {
   updateScores(p2, p1);
 });
 
 resetButton.addEventListener('click', reset);
 
+/* 得点リセット */
 function reset() {
   isGameOver = false;
   for (let p of [p1, p2]) {
@@ -54,12 +54,9 @@ function reset() {
     p.display.classList.remove('has-text-success', 'has-text-danger');
     p.button.disabled = false;
   }
-  // p2.score = 0;
-  // p2.display.textContent = 0;
-  // p2.display.classList.remove('has-text-danger', 'has-text-success');
-  // p2.button.disabled = false;
 }
 
+/* マッチポイント設定 */
 winningScoreSelect.addEventListener('change', function () {
   winningScore = parseInt(this.value);
   reset();
